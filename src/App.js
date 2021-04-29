@@ -20,8 +20,8 @@ const buttons = [
  *  currentState: 1
  * }
  *
- * setTheme: (value) => {state[0] = value; React.rerender()}
- * setCounter: (value) => {state[1] = value; React.rerender()}
+ * setTheme: (value) => {if (state[0] !== value) {state[0] = value; React.rerender()}}
+ * setCounter: (value) => {if (state[1] !== value) {state[1] = value; React.rerender()}}
  */
 /**
  * Exo 1: Créer un bouton qui va permettre d'ouvrir la modal
