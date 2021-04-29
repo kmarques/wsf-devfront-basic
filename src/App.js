@@ -10,8 +10,25 @@ const buttons = [
   { onClick: (event) => alert("alive"), title: "alive" },
 ];
 
+/**
+ * {
+ *  name: App,
+ *  state: [
+ *    "dark",
+ *    "counter"
+ *  ],
+ *  currentState: 1
+ * }
+ *
+ * setTheme: (value) => {state[0] = value; React.rerender()}
+ * setCounter: (value) => {state[1] = value; React.rerender()}
+ */
+/**
+ * Exo 1: Créer un bouton qui va permettre d'ouvrir la modal
+ */
 function App() {
   const [theme, setTheme] = useState("dark");
+  const [counter, setCounter] = useState(0);
 
   return (
     <div className="App">
@@ -19,6 +36,11 @@ function App() {
         theme={theme}
         title={"theme: " + theme}
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      />
+      <Button
+        theme={theme}
+        title={"counter: " + counter}
+        onClick={() => setCounter(counter + 1)}
       />
       {buttons.map((button) => (
         <Button key={button.title} theme={theme} {...button} />
