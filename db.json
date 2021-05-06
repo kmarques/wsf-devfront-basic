@@ -1,0 +1,44 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "course",
+      "completed": false
+    },
+    {
+      "id": 2,
+      "title": "sport",
+      "completed": false
+    },
+    {
+      "id": 3,
+      "title": "reunion",
+      "completed": false
+    },
+    {
+      "title": "test",
+      "completed": true,
+      "id": 4
+    },
+    {
+      "title": "test",
+      "completed": true,
+      "id": 5
+    },
+    {
+      "title": "foobar",
+      "completed": false,
+      "id": 6
+    },
+    {
+      "title": "foooo",
+      "completed": false,
+      "id": 7
+    },
+    {
+      "title": "baaaaar",
+      "completed": false,
+      "id": 8
+    }
+  ]
+}

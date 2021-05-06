@@ -1,0 +1,10 @@
+POST http://localhost:3001/products
+Content-Type: application/json
+
+{
+    "title":"test",
+    "completed": true
+}
+
+###
+GET http://localhost:3001/products

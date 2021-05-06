@@ -1,19 +1,34 @@
-import React, { useState } from "react";
-import Button from "./Button";
-import Form from "./Form";
-import List from "./List";
-import Modal from "./Modal";
+import React, { useEffect, useState } from "react";
+import Button from "./Lib/Button";
+import Form from "./TodoList/Form";
+import List from "./TodoList/List";
+import Modal from "./Lib/Modal";
 
+/**
+ * LifeCycle => useEffect
+ *   -> Create : Création du composant
+ *   -> Mount : Composant affiché dans la page
+ *   -> beforeUpdate : Composant mis à jour (via les states)
+ *   -> Update : Composant mis à jour (via les states)
+ *   -> Unmount : Composant retiré de la page
+ */
 function Body(props) {
-  const [todos, setTodos] = useState([
-    { id: 1, title: "course" },
-    { id: 2, title: "sport" },
-    { id: 3, title: "reunion" },
-  ]);
+  const [todos, setTodos] = useState([]);
   const [show, setShow] = useState(false);
 
-  const handleSubmit = (title) => {
-    setTodos([...todos, { id: Date.now(), title }]);
+  const handleAdd = (title) => {
+    fetch("http://localhost:3001/products", {
+      method: "POST",
+      body: JSON.stringify({
+        title,
+        completed: false,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setTodos([...todos, data]));
   };
 
   const handleDelete = (item) => {
@@ -26,11 +41,28 @@ function Body(props) {
     );
   };
 
+  useEffect(() => {
+    console.log("Todos updated");
+    return () => {
+      console.log("Todos before Update");
+    };
+  }, [todos, show, props.theme]);
+
+  useEffect(() => {
+    console.log("Todos mounted");
+    fetch("http://localhost:3001/products")
+      .then((response) => response.json())
+      .then((data) => setTodos(data));
+    return () => {
+      console.log("Todo unmounted");
+    };
+  }, []);
+
   return (
     <div>
       <h1>Products</h1>
       <List data={todos} onDelete={handleDelete} onChange={handleChange} />
-      <Form theme={props.theme} onSubmit={handleSubmit} />
+      <Form theme={props.theme} onSubmit={handleAdd} />
       <Button
         title="Open modal"
         theme={props.theme}
