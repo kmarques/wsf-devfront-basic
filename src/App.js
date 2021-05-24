@@ -1,14 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
-import Button from "./components/Lib/Button";
 import Page from "./components/Page";
-
-const buttons = [
-  { variant: "rectangle", title: "Hello" },
-  { onClick: (event) => console.log("world"), title: "World" },
-  { variant: "rectangle", title: "I'm" },
-  { onClick: (event) => alert("alive"), title: "alive" },
-];
+import { ThemeProvider } from "@material-ui/core/styles";
+import MuiTheme from "./config/theme";
+import { BrowserRouter as Router } from "react-router-dom";
 
 /**
  * {
@@ -27,26 +22,12 @@ const buttons = [
  * Exo 1: Créer un bouton qui va permettre d'ouvrir la modal
  */
 function App() {
-  const [theme, setTheme] = useState("dark");
-  const [counter, setCounter] = useState(0);
-
   return (
-    <div className="App">
-      <Button
-        theme={theme}
-        title={"theme: " + theme}
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      />
-      <Button
-        theme={theme}
-        title={"counter: " + counter}
-        onClick={() => setCounter(counter + 1)}
-      />
-      {buttons.map((button) => (
-        <Button key={button.title} theme={theme} {...button} />
-      ))}
-      <Page theme={theme} />
-    </div>
+    <ThemeProvider theme={MuiTheme}>
+      <Router>
+        <Page />
+      </Router>
+    </ThemeProvider>
   );
 }
 /**

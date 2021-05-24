@@ -1,22 +1,21 @@
 import React from "react";
+import ListItem from "./ListItem";
+import MuiList from "@material-ui/core/List";
 
 function List(props) {
   const { data, onDelete, onChange } = props;
 
   return (
-    <ul>
+    <MuiList>
       {data.map((item, index) => (
-        <li key={item.id} style={{ textDecoration: item.completed ? "line-through" : "none" }}>
-          {item.title}
-          <button onClick={() => onDelete(item)}>Supprimer</button>
-          <button
-            onClick={() => onChange(item, { completed: !item.completed })}
-          >
-            {item.completed ? "X" : "O"}
-          </button>
-        </li>
+        <ListItem
+          key={item.id}
+          item={item}
+          onDelete={onDelete}
+          onChange={onChange}
+        />
       ))}
-    </ul>
+    </MuiList>
   );
 }
 

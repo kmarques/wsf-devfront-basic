@@ -8,3 +8,12 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3001/products
+
+###
+PUT http://localhost:3001/products/2
+Content-Type: application/json
+
+{
+    "completed": false,
+    "title": "sport"
+}
